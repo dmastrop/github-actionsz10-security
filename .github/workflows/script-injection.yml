@@ -9,10 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign label
-        run: |
 # extract the tile of the issue that was created.
 # store it in issue_title.  If the title has "bug", then output that issue
-# is about a bug, otherwise not about a bug. 
+# is about a bug, otherwise not about a bug.     
+        run: |
+
           issue_title="${{ github.event.issue.title }}"
           if [[ "$issue_title" == *"bug"* ]]; then
           echo "Issue is about a bug!"
