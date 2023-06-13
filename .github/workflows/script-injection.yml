@@ -1,0 +1,21 @@
+name: Label Issues (Script Injection Example)
+# this script will run whenever a new issue is opened on the git repository
+on:
+  issues:
+    types:
+      - opened
+jobs:
+  assign-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign label
+        run: |
+# extract the tile of the issue that was created.
+# store it in issue_title.  If the title has "bug", then output that issue
+# is about a bug, otherwise not about a bug. 
+          issue_title="${{ github.event.issue.title }}"
+          if [[ "$issue_title" == *"bug"* ]]; then
+          echo "Issue is about a bug!"
+          else
+          echo "Issue is not about a bug"
+          fi
