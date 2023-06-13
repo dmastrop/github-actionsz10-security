@@ -23,20 +23,20 @@ jobs:
 #          fi
 
 # to protect from script inject use an Env variable
-     steps:
-       - name: Assign label
-         env:
-           TITLE: ${{ github.event.issue.title }}
+    steps:
+      - name: Assign label
+        env:
+          TITLE: ${{ github.event.issue.title }}
 # extract the tile of the issue that was created.
 # store it in issue_title.  If the title has "bug", then output that issue
 # is about a bug, otherwise not about a bug.     
-         run: |
+        run: |
 
-          if [[ "$TITLE" == *"bug"* ]]; then
-          echo "Issue is about a bug!"
-          else
-          echo "Issue is not about a bug"
-          fi
+           if [[ "$TITLE" == *"bug"* ]]; then
+           echo "Issue is about a bug!"
+           else
+           echo "Issue is not about a bug"
+           fi
 #Note here the TITLE is evaluated outside of the shell command
 # in the if statement it will be treated as text
 # it is always best practice in run: commands to avoid using the title itself
