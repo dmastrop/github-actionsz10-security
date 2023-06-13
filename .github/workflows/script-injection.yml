@@ -7,16 +7,38 @@ on:
 jobs:
   assign-label:
     runs-on: ubuntu-latest
-    steps:
-      - name: Assign label
+
+#    steps:
+#      - name: Assign label
+## extract the tile of the issue that was created.
+## store it in issue_title.  If the title has "bug", then output that issue
+## is about a bug, otherwise not about a bug.     
+#        run: |
+#
+#          issue_title="${{ github.event.issue.title }}"
+#          if [[ "$issue_title" == *"bug"* ]]; then
+#          echo "Issue is about a bug!"
+#          else
+#          echo "Issue is not about a bug"
+#          fi
+
+# to protect from script inject use an Env variable
+     steps:
+       - name: Assign label
+         env:
+           TITLE: ${{ github.event.issue.title }}
 # extract the tile of the issue that was created.
 # store it in issue_title.  If the title has "bug", then output that issue
 # is about a bug, otherwise not about a bug.     
-        run: |
+         run: |
 
-          issue_title="${{ github.event.issue.title }}"
-          if [[ "$issue_title" == *"bug"* ]]; then
+          if [[ "$TITLE" == *"bug"* ]]; then
           echo "Issue is about a bug!"
           else
           echo "Issue is not about a bug"
           fi
+#Note here the TITLE is evaluated outside of the shell command
+# in the if statement it will be treated as text
+# it is always best practice in run: commands to avoid using the title itself
+# but rather use Env variables to represent the text of the title and make sure the
+# evaluation is done outside of the run command.
