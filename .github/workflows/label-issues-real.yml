@@ -11,8 +11,8 @@ jobs:
   # can add permissions: to job level or entire workflow level, where they will apply to all jobs
   # permissions:  issues: is the one we need here . It can be read | write | none read-all write-all, etc...
     permissions:
-      #issues: write
-      issues: read
+      issues: write
+      #issues: read
       # without this the script can do all other things.
       # script injection would be more difficult with the permissions:
       # this will also limit actions that are mallicious.
